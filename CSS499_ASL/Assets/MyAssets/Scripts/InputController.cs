@@ -12,8 +12,10 @@ public class InputController : InputSystemGlobalListener, IMixedRealityInputHand
     public MixedRealityInputAction TRSSwitch;
     public MixedRealityInputAction leftGrip;
     public MixedRealityInputAction rightGrip;
+    public MixedRealityInputAction cameraSwitch;
     public Locomotion controller;
     public ArmManipulator arms;
+    public CameraSwitcher camSwitcher;
     public float deadZone = .4f;
 
     public void OnInputChanged(InputEventData<Vector2> eventData)
@@ -64,6 +66,11 @@ public class InputController : InputSystemGlobalListener, IMixedRealityInputHand
         if (eventData.MixedRealityInputAction == TRSSwitch)
         {
             arms.setTRS();
+        }
+
+        if(eventData.MixedRealityInputAction == cameraSwitch)
+        {
+            camSwitcher.switchCam();
         }
 
         if (eventData.MixedRealityInputAction == leftGrip)

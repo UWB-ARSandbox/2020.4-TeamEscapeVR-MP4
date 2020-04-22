@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading;
 using UnityEngine;
+using Microsoft.MixedReality.Toolkit;
+using System.Diagnostics;
 
 public class ArmManipulator : MonoBehaviour
 {
@@ -41,80 +43,84 @@ public class ArmManipulator : MonoBehaviour
             y = -1.0f;
         }
 
-        if (selectedObject.transform.position.x < limit || selectedObject.transform.position.x > -limit)
+        if(selectedObject != null)
         {
-            if(currentManipulation == Manipulation.T)
+            if (selectedObject.transform.position.x < limit || selectedObject.transform.position.x > -limit)
             {
-                //selectedObject.transform.position += new Vector3(x * Time.deltaTime, 0, 0);
-                selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                if (currentManipulation == Manipulation.T)
                 {
-                    selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(x * Time.deltaTime, 0, 0));
-                });
-            }
-            else if(currentManipulation == Manipulation.R)
-            {
-                //selectedObject.transform.localScale += new Vector3(x * Time.deltaTime, 0, 0);
-                selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    //selectedObject.transform.position += new Vector3(x * Time.deltaTime, 0, 0);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(x * Time.deltaTime, 0, 0));
+                    });
+                }
+                else if (currentManipulation == Manipulation.R)
                 {
-                    selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(x * Time.deltaTime, 0, 0));
-                });
-            }
-            else if(currentManipulation == Manipulation.S)
-            {
-                //selectedObject.transform.Rotate(x, 0, 0);
-                selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    //selectedObject.transform.localScale += new Vector3(x * Time.deltaTime, 0, 0);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(x * Time.deltaTime, 0, 0));
+                    });
+                }
+                else if (currentManipulation == Manipulation.S)
                 {
-                    selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldRotation(new Quaternion(x * Time.deltaTime, 0, 0, 1));
-                });
-            }
-            
-        }
+                    //selectedObject.transform.Rotate(x, 0, 0);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldRotation(new Quaternion(x * Time.deltaTime, 0, 0, 1));
+                    });
+                }
 
-        if (selectedObject.transform.position.z < limit || selectedObject.transform.position.z > -limit)
-        {
-            if (currentManipulation == Manipulation.T)
-            {
-                //selectedObject.transform.position += new Vector3(0, 0, z * Time.deltaTime);
-                selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                {
-                    selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(0, 0, z * Time.deltaTime));
-                });
-            }
-            else if (currentManipulation == Manipulation.R)
-            {
-                //selectedObject.transform.localScale += new Vector3(0, 0, z * Time.deltaTime);
-                selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                {
-                    selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(0, 0, z * Time.deltaTime));
-                });
-            }
-            else if (currentManipulation == Manipulation.S)
-            {
-                //selectedObject.transform.Rotate(0, 0, z);
-                selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
-                {
-                    selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldRotation(new Quaternion(0, 0, z * Time.deltaTime, 1));
-                });
-            }
-            
-        }
-
-        if (selectedObject.transform.position.y < limit || selectedObject.transform.position.y > -limit)
-        {
-            if (currentManipulation == Manipulation.T)
-            {
-                selectedObject.transform.position += new Vector3(0, y * Time.deltaTime, 0);
-            }
-            else if (currentManipulation == Manipulation.R)
-            {
-                selectedObject.transform.localScale += new Vector3(0, y * Time.deltaTime, 0);
-            }
-            else if (currentManipulation == Manipulation.S)
-            {
-                selectedObject.transform.Rotate(0, y, 0);
             }
 
+            if (selectedObject.transform.position.z < limit || selectedObject.transform.position.z > -limit)
+            {
+                if (currentManipulation == Manipulation.T)
+                {
+                    //selectedObject.transform.position += new Vector3(0, 0, z * Time.deltaTime);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(0, 0, z * Time.deltaTime));
+                    });
+                }
+                else if (currentManipulation == Manipulation.R)
+                {
+                    //selectedObject.transform.localScale += new Vector3(0, 0, z * Time.deltaTime);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(0, 0, z * Time.deltaTime));
+                    });
+                }
+                else if (currentManipulation == Manipulation.S)
+                {
+                    //selectedObject.transform.Rotate(0, 0, z);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldRotation(new Quaternion(0, 0, z * Time.deltaTime, 1));
+                    });
+                }
+
+            }
+
+            if (selectedObject.transform.position.y < limit || selectedObject.transform.position.y > -limit)
+            {
+                if (currentManipulation == Manipulation.T)
+                {
+                    selectedObject.transform.position += new Vector3(0, y * Time.deltaTime, 0);
+                }
+                else if (currentManipulation == Manipulation.R)
+                {
+                    selectedObject.transform.localScale += new Vector3(0, y * Time.deltaTime, 0);
+                }
+                else if (currentManipulation == Manipulation.S)
+                {
+                    selectedObject.transform.Rotate(0, y, 0);
+                }
+
+            }
         }
+        
 
         ////if (objectCollider.transform.position.x < limit || objectCollider.transform.position.x > -limit)
         //{
@@ -129,16 +135,60 @@ public class ArmManipulator : MonoBehaviour
 
     public void setSelectedObject()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 20.0f, Physics.DefaultRaycastLayers));
+        //RaycastHit hit;
+        //if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 20.0f, Physics.DefaultRaycastLayers)) ;
+        //{
+        //    if (hit.transform.tag == "MP4MovableObjects")
+        //    {
+        //        previousObject = selectedObject;
+        //        selectedObject = hit.transform.gameObject.GetComponent<PrimitiveCollider>().primObj;
+        //        if (selectedObject == previousObject)
+        //        {
+        //            selectedObject = selectedObject.transform.parent.parent.gameObject;
+        //        }
+        //    }
+        //}
+
+        UnityEngine.Debug.Log("Called 1");
+        foreach (var source in MixedRealityToolkit.InputSystem.DetectedInputSources)
         {
-            if (hit.transform.tag == "MP4MovableObjects")
+            // Ignore anything that is not a hand because we want articulated hands
+            if (source.SourceType == Microsoft.MixedReality.Toolkit.Input.InputSourceType.Controller)
             {
-                previousObject = selectedObject;
-                selectedObject = hit.transform.gameObject.GetComponent<PrimitiveCollider>().primObj;
-                if (selectedObject == previousObject)
+                UnityEngine.Debug.Log("Called 2");
+
+                foreach (var p in source.Pointers)
                 {
-                    selectedObject = selectedObject.transform.parent.parent.gameObject;
+                    if (p is Microsoft.MixedReality.Toolkit.Input.IMixedRealityNearPointer)
+                    {
+                        // Ignore near pointers, we only want the rays
+                        continue;
+                    }
+                    if (p.Result != null)
+                    {
+                        UnityEngine.Debug.Log("Called 3");
+                        var startPoint = p.Position;
+                        var endPoint = p.Result.Details.Point;
+                        var hitObject = p.Result.Details.Object;
+                        if (hitObject)
+                        {
+                            UnityEngine.Debug.Log("Called 4");
+
+                            if (p.Result.CurrentPointerTarget.transform.tag == "MP4MovableObjects")
+                            {
+                                UnityEngine.Debug.Log("Called 5: " + p.Result.CurrentPointerTarget);
+
+                                previousObject = selectedObject;
+                                selectedObject = p.Result.CurrentPointerTarget.GetComponent<PrimitiveCollider>().primObj;
+                                if (selectedObject == previousObject)
+                                {
+                                    selectedObject = selectedObject.transform.parent.parent.gameObject;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }

@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public PlayerController controller;
-    public ASL.ASLObject Player1;
-    public ASL.ASLObject Player2;
+    public GameObject playerCamera;
+    public GameObject Player1;
+    public GameObject Player2;
     // Start is called before the first frame update
     void Start()
     {
         if(ASL.GameLiftManager.GetInstance().m_PeerId == 1)
         {
-            controller.client = Player1;
+            Player1.transform.position = playerCamera.transform.position;
+            Player1.transform.rotation = playerCamera.transform.rotation;
+            Player1.transform.parent = playerCamera.transform;
         }
         if (ASL.GameLiftManager.GetInstance().m_PeerId == 2)
         {
-            controller.client = Player2;
+            Player2.transform.position = playerCamera.transform.position;
+            Player2.transform.rotation = playerCamera.transform.rotation;
+            Player2.transform.parent = playerCamera.transform;
         }
     }
 }

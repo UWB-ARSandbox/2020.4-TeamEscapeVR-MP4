@@ -77,3 +77,6 @@ MonoBehaviour:
   - id: 21
     description: Right Grip
     axisConstraint: 2
+  - id: 22
+    description: Camera Switch
+    axisConstraint: 2

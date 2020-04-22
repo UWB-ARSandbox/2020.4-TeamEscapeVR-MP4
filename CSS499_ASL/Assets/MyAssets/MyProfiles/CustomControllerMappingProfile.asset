@@ -307,9 +307,9 @@ MonoBehaviour:
       axisType: 2
       inputType: 18
       inputAction:
-        id: 0
-        description: None
-        axisConstraint: 0
+        id: 22
+        description: Camera Switch
+        axisConstraint: 2
       keyCode: 0
       axisCodeX: 
       axisCodeY: 
@@ -955,9 +955,9 @@ MonoBehaviour:
       axisType: 2
       inputType: 18
       inputAction:
-        id: 0
-        description: None
-        axisConstraint: 0
+        id: 22
+        description: Camera Switch
+        axisConstraint: 2
       keyCode: 0
       axisCodeX: 
       axisCodeY: 
@@ -2770,9 +2770,9 @@ MonoBehaviour:
       axisType: 2
       inputType: 7
       inputAction:
-        id: 0
-        description: None
-        axisConstraint: 0
+        id: 22
+        description: Camera Switch
+        axisConstraint: 2
       keyCode: 348
       axisCodeX: 
       axisCodeY: 
