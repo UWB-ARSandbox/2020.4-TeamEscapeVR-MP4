@@ -24,7 +24,7 @@ public class ArmManipulator : MonoBehaviour
     public GameObject objectCollider;
     public GameObject cam;
 
-    private Manipulation currentManipulation = Manipulation.T;
+    private Manipulation currentManipulation = Manipulation.R;
 
     public void Update()
     {
@@ -55,7 +55,7 @@ public class ArmManipulator : MonoBehaviour
                         selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(x * Time.deltaTime, 0, 0));
                     });
                 }
-                else if (currentManipulation == Manipulation.R)
+                else if (currentManipulation == Manipulation.S)
                 {
                     //selectedObject.transform.localScale += new Vector3(x * Time.deltaTime, 0, 0);
                     selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
@@ -63,7 +63,7 @@ public class ArmManipulator : MonoBehaviour
                         selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(x * Time.deltaTime, 0, 0));
                     });
                 }
-                else if (currentManipulation == Manipulation.S)
+                else if (currentManipulation == Manipulation.R)
                 {
                     //selectedObject.transform.Rotate(x, 0, 0);
                     selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
@@ -84,7 +84,7 @@ public class ArmManipulator : MonoBehaviour
                         selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(0, 0, z * Time.deltaTime));
                     });
                 }
-                else if (currentManipulation == Manipulation.R)
+                else if (currentManipulation == Manipulation.S)
                 {
                     //selectedObject.transform.localScale += new Vector3(0, 0, z * Time.deltaTime);
                     selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
@@ -92,7 +92,7 @@ public class ArmManipulator : MonoBehaviour
                         selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(0, 0, z * Time.deltaTime));
                     });
                 }
-                else if (currentManipulation == Manipulation.S)
+                else if (currentManipulation == Manipulation.R)
                 {
                     //selectedObject.transform.Rotate(0, 0, z);
                     selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
@@ -107,15 +107,24 @@ public class ArmManipulator : MonoBehaviour
             {
                 if (currentManipulation == Manipulation.T)
                 {
-                    selectedObject.transform.position += new Vector3(0, y * Time.deltaTime, 0);
-                }
-                else if (currentManipulation == Manipulation.R)
-                {
-                    selectedObject.transform.localScale += new Vector3(0, y * Time.deltaTime, 0);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldPosition(new Vector3(0, y * Time.deltaTime, 0));
+                    });
                 }
                 else if (currentManipulation == Manipulation.S)
                 {
-                    selectedObject.transform.Rotate(0, y, 0);
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldScale(new Vector3(0, y * Time.deltaTime, 0));
+                    });
+                }
+                else if (currentManipulation == Manipulation.R)
+                {
+                    selectedObject.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+                    {
+                        selectedObject.GetComponent<ASL.ASLObject>().SendAndIncrementWorldRotation(new Quaternion(0, y * Time.deltaTime, 0, 1));
+                    });
                 }
 
             }

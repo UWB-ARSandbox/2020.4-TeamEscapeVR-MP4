@@ -23,4 +23,32 @@ public class PlayerManager : MonoBehaviour
             Player2.transform.parent = playerCamera.transform;
         }
     }
+
+    void Update()
+    {
+        if (ASL.GameLiftManager.GetInstance().m_PeerId == 1)
+        {
+            Player1.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+             {
+                 Player1.GetComponent<ASL.ASLObject>().SendAndSetWorldPosition(playerCamera.transform.position);
+             });
+
+            Player1.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                Player1.GetComponent<ASL.ASLObject>().SendAndSetWorldRotation(new Quaternion(playerCamera.transform.eulerAngles.x, playerCamera.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z, 1));
+            });
+        }
+        if (ASL.GameLiftManager.GetInstance().m_PeerId == 2)
+        {
+            Player2.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                Player2.GetComponent<ASL.ASLObject>().SendAndSetWorldPosition(playerCamera.transform.position);
+            });
+
+            Player2.GetComponent<ASL.ASLObject>().SendAndSetClaim(() =>
+            {
+                Player2.GetComponent<ASL.ASLObject>().SendAndSetWorldRotation(new Quaternion(playerCamera.transform.eulerAngles.x, playerCamera.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z, 1));
+            });
+        }
+    }
 }
